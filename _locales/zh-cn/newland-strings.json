@@ -13,6 +13,9 @@
     "newland.newland_display|block": "显示 %name",
     "newland.newland_print|block": "打印 %t X %x Y %y||延时 %d 毫秒",
     "newland.newland_lcd_direction|block": "LCD方向%dir",
+
+    "newland.newland_volume_control|block": "ME66音量%dir",
+
     "newland.newland_track_circle|block": "追踪圆形 阈值%th",
     "newland.newland_oncircletrack|block": "追踪圆形",
     "newland.newland_track_rect|block": "追踪矩形 阈值%th",

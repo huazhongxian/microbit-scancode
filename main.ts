@@ -75,6 +75,21 @@ namespace newland {
     PORT4 = 3,
   }
 
+  export enum VolumeNum {
+    //% block=num0
+    Volume0 = 0,
+    //% block=num1
+    Volume1 = 1,
+    //% block=num2
+    Volume2 = 2,
+    //% block=num3
+    Volume3 = 3,
+    //% block=num4
+    Volume4 = 4,
+    //% block=num5
+    Volume5 = 5,
+  }
+
   export enum LcdDirection {
     //% block=Front
     Front = 0,
@@ -262,6 +277,16 @@ namespace newland {
     serial.writeLine(str)
     basic.pause(100)
   }
+
+
+  //% blockId=newland_volume_control block="Newland LCD Dir%dir"
+  //% group="Basic" weight=98
+  export function newland_volume_control(dir: VolumeNum): void {
+    let str = `K6 ${dir}`
+    serial.writeLine(str)
+    basic.pause(100)
+  }
+
 
   /**
    * @param t string to display; eg: hello
