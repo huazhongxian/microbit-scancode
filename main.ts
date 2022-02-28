@@ -76,17 +76,12 @@ namespace newland {
   }
 
   export enum VolumeNum {
-    //% block=num0
+
     Volume0 = 0,
-    //% block=num1
     Volume1 = 1,
-    //% block=num2
     Volume2 = 2,
-    //% block=num3
     Volume3 = 3,
-    //% block=num4
     Volume4 = 4,
-    //% block=num5
     Volume5 = 5,
   }
 
@@ -105,6 +100,9 @@ namespace newland {
   }
 
   serial.onDataReceived('\n', function () {
+
+
+    basic.showNumber(8)
     let a = serial.readUntil('\n')
     if (a.charAt(0) == 'K') {
       a = trim(a)
@@ -254,13 +252,8 @@ namespace newland {
   //% group="Basic" weight=100
   export function newland_init(tx: SerialPin, rx: SerialPin): void {
     serial.redirect(tx, rx, BaudRate.BaudRate115200)
-    basic.pause(500)
-    serial.setTxBufferSize(64)
-    serial.setRxBufferSize(64)
     serial.readString()
-    serial.writeString('\n\n')
-    // take control of the ext serial port from Newland
-    asyncWrite(`K0`, 0)
+    //serial.writeString('\n\n')
     basic.pause(300)
   }
 
@@ -283,8 +276,43 @@ namespace newland {
   //% group="Basic" weight=98
   export function newland_volume_control(dir: VolumeNum): void {
     let str = `K6 ${dir}`
-    serial.writeLine(str)
+    if(dir == 0){
+      serial.writeLine('<STX><0015><SET><01><00><VOLUME=0><ETX><56>')
+      basic.showNumber(0)
+
+    } else if (dir == 1) {
+      serial.writeLine('<STX><0015><SET><01><00><VOLUME=1><ETX><57>')
+      basic.showNumber(1)
+    } else if (dir == 2) {
+      serial.writeLine('<STX><0015><SET><01><00><VOLUME=2><ETX><54>')
+      //   basic.showNumber(2)
+    } else if (dir == 3) {
+      serial.writeLine('<STX><0015><SET><01><00><VOLUME=3><ETX><55>')
+      //    basic.showNumber(3)
+
+    } else if (dir == 4) {
+
+      serial.writeLine('<STX><0015><SET><01><00><VOLUME=4><ETX><52>')
+      //   basic.showNumber(4)
+
+
+
+    } else if (dir == 5) {
+
+      serial.writeLine('<STX><0015><SET><01><00><VOLUME=5><ETX><53>')
+      //    basic.showNumber(6)
+
+    } else {
+
+      //  basic.showNumber(6)
+    }
+
     basic.pause(100)
+
+
+
+
+
   }
 
 
