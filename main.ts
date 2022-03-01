@@ -4,8 +4,8 @@ load dependency
 "newland": "file:../pxt-newland"
 */
 
-//% color="#5c7cfa" weight=10 icon="\uf16b"
-//% groups='["Basic", "Graphic", Classifier", "Tag/Code", "Audio", "Face", "Wifi", "CloudAI", "AI"]'
+//% color="#5c7cfa" weight=10 icon="\uf108"
+//% groups='["Basic", Classifier"]'
 namespace ME66 {
   //type起个新类型
   type EvtAct = () => void
@@ -76,20 +76,19 @@ namespace ME66 {
   }
 
   export enum VolumeNum {
-
+    Volume5 = 5,
     Volume0 = 0,
     Volume1 = 1,
     Volume2 = 2,
     Volume3 = 3,
     Volume4 = 4,
-    Volume5 = 5,
   }
 
   export enum OnOffDirection {
-    //% block=Off
-    Off = 0,
     //% block=On
     On = 1,
+    //% block=Off
+    Off = 0,
   }
 
   export enum LcdDirection {
@@ -377,22 +376,6 @@ namespace ME66 {
     serial.writeLine(str)
   }
 
-  /*//% blockId=newland_reset_cls block="Newland Reset Classifier"
-  //% group="Classifier" weight=90
-  export function newland_reset_cls(): void {
-    let str = `K40`
-    serial.writeLine(str)
-  }*/
-
-  /**
-   * @param tag tag index; eg: cat
-   */
-  /*//% blockId=newland_addtag block="Newland Add Tag %tag"
-  //% group="Classifier" weight=89
-  export function newland_addtag(tag: string): void {
-    let str = `K41 ${tag}`
-    serial.writeLine(str)
-  }*/
 
   //% blockId=newland_run block="Newland Run Classifer"
   //% group="Classifier" weight=88
@@ -408,25 +391,7 @@ namespace ME66 {
     classifierEvt = handler
   }
 
-  /**
-   * @param path json to save; eg: class.json
-   */
-  /*//% blockId=newland_cls_save block="Newland Save Classifier %path"
-  //% group="Classifier" weight=86
-  export function newland_cls_save(path: string): void {
-    let str = `K43 ${path}`
-    serial.writeLine(str)
-  }*/
 
-  /**
-   * @param path json to save; eg: class.json
-   */
-  /*//% blockId=newland_cls_load block="Newland Load Classifier %path"
-  //% group="Classifier" weight=85
-  export function newland_cls_load(path: string): void {
-    let str = `K44 ${path}`
-    serial.writeLine(str)
-  }*/
 
 }
 
