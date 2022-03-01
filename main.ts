@@ -103,8 +103,9 @@ namespace newland {
 
     basic.showNumber(8)
     let a = serial.readUntil('\n')
-    let data = eval(a)
-    display.scroll(data["Price"])
+    basic.showString(a)
+    // let data = eval(a)
+    // display.scroll(data["Price"])
     if (a.charAt(0) == 'K') {
       a = trim(a)
       let b = a.slice(1, a.length).split(' ')
