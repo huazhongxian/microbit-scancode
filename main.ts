@@ -85,6 +85,13 @@ namespace newland {
     Volume5 = 5,
   }
 
+  export enum OnOffDirection {
+    //% block=Off
+    Off = 0,
+    //% block=On
+    On = 1,
+  }
+
   export enum LcdDirection {
     //% block=Front
     Front = 0,
@@ -294,9 +301,9 @@ namespace newland {
   }
 
 
-  //% blockId=newland_volume_onOff block="Newland Volume Dir%dir"
+  //% blockId=newland_volume_onOff block="Newland Volume onOff%dir"
   //% group="Basic" weight=98
-  export function newland_volume_onOff(dir: VolumeNum): void {
+  export function newland_volume_onOff(dir: OnOffDirection): void {
     if (dir == 0) {
       serial.writeLine('<STX><0021><SET><01><00><PROMPT=0003OFF><ETX><21>')
     } else if (dir == 1) {

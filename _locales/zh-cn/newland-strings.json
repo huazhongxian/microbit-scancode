@@ -19,6 +19,10 @@
     "newland.newland_volume_set|block": "重置ME66",
 
 
+    "newland.OnOffDirection.On|block":"开",
+    "newland.OnOffDirection.Off|block":"关",
+
+
     "newland.newland_track_circle|block": "追踪圆形 阈值%th",
     "newland.newland_oncircletrack|block": "追踪圆形",
     "newland.newland_track_rect|block": "追踪矩形 阈值%th",
