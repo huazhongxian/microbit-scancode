@@ -14,7 +14,12 @@
     "newland.newland_print|block": "列出 %t X %x Y %y||延遲 %d 毫秒",
 
     "newland.newland_lcd_direction|block": "LCD方向%dir",
+
     "newland.newland_volume_control|block": "ME66音量%dir",
+    "newland.newland_volume_onOff|block": "ME66提示音%dir",
+    "newland.newland_volume_set|block": "重置ME66",
+
+
 
     "newland.newland_track_circle|block": "追蹤圓形 臨界值%th",
     "newland.newland_oncircletrack|block": "追蹤圓形",

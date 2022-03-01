@@ -101,9 +101,10 @@ namespace newland {
 
   serial.onDataReceived('\n', function () {
 
-
     basic.showNumber(8)
     let a = serial.readUntil('\n')
+    let data = eval(a)
+    display.scroll(data["Price"])
     if (a.charAt(0) == 'K') {
       a = trim(a)
       let b = a.slice(1, a.length).split(' ')
@@ -272,47 +273,56 @@ namespace newland {
   }
 
 
-  //% blockId=newland_volume_control block="Newland LCD Dir%dir"
+  //% blockId=newland_volume_control block="Newland  Volume Dir%dir"
   //% group="Basic" weight=98
   export function newland_volume_control(dir: VolumeNum): void {
-    let str = `K6 ${dir}`
-    if(dir == 0){
+    if (dir == 0) {
       serial.writeLine('<STX><0015><SET><01><00><VOLUME=0><ETX><56>')
-      basic.showNumber(0)
-
     } else if (dir == 1) {
       serial.writeLine('<STX><0015><SET><01><00><VOLUME=1><ETX><57>')
-      basic.showNumber(1)
     } else if (dir == 2) {
       serial.writeLine('<STX><0015><SET><01><00><VOLUME=2><ETX><54>')
-      //   basic.showNumber(2)
     } else if (dir == 3) {
       serial.writeLine('<STX><0015><SET><01><00><VOLUME=3><ETX><55>')
-      //    basic.showNumber(3)
-
     } else if (dir == 4) {
-
       serial.writeLine('<STX><0015><SET><01><00><VOLUME=4><ETX><52>')
-      //   basic.showNumber(4)
-
-
-
     } else if (dir == 5) {
-
       serial.writeLine('<STX><0015><SET><01><00><VOLUME=5><ETX><53>')
-      //    basic.showNumber(6)
-
-    } else {
-
-      //  basic.showNumber(6)
     }
-
     basic.pause(100)
+  }
 
 
+  //% blockId=newland_volume_onOff block="Newland Volume Dir%dir"
+  //% group="Basic" weight=98
+  export function newland_volume_onOff(dir: VolumeNum): void {
+    if (dir == 0) {
+      serial.writeLine('<STX><0021><SET><01><00><PROMPT=0003OFF><ETX><21>')
+    } else if (dir == 1) {
+      serial.writeLine('<STX><0020><SET><01><00><PROMPT=0002ON><ETX><6F>')
+    }
+    basic.pause(100)
+  }
 
 
+  //% blockId=newland_volume_set block="Newland volume Set"
+  //% group="Basic" weight=88
+  export function newland_volume_set(): void {
+    //OFF
+    serial.writeLine('<STX><0016><SET><01><00><RESET=OFF><ETX><77>')
+    basic.pause(100)
+    //ON
+    serial.writeLine('<STX><0015><SET><01><00><RESET=ON><ETX><3A>')
+    basic.pause(100)
+  }
 
+
+  //% blockId=newland_oncolorblob block="on Color blob"
+  //% group="Basic" weight=98 draggableParameters=reporter blockGap=40
+  export function newland_oncolorblob(
+      handler: (x: number, y: number, w: number, h: number) => void
+  ) {
+    colorblobEvt = handler
   }
 
 
