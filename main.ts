@@ -11,7 +11,7 @@ namespace ME66 {
   type EvtAct = () => void
   type EvtNum = (num: number) => void
   type EvtCardNum = (num: number) => void
-  type Evtxye = (x: number, y: number, e: number) => void
+  type Evtxye = (x: string, y: string, e: string) => void
   type Evtxy = (x: number, y: number) => void
   type EvtFaceNum = (x: number) => void
   type Evtxyobj = (txt: string, x: number, y: number) => void
@@ -107,141 +107,33 @@ namespace ME66 {
 
   serial.onDataReceived('\n', function () {
 
-    basic.showNumber(8)
+
     let a = serial.readUntil('\n')
-    basic.showString(a)
-    // let data = eval(a)
-    // display.scroll(data["Price"])
+
+    if (a.indexOf("<STX>") != -1) {
+      basic.showNumber(7)
+    } else {
+      basic.showString(a)
+      basic.showNumber(8)
+
+      let obj = JSON.parse(a);
+
+      if (btnEvt) {
+        btnEvt(obj.SKU, obj.Name_PY, obj.Price) // btna btnb
+      }
+      let cmd =42;
+      control.raiseEvent(EventBusSource.MES_BROADCAST_GENERAL_ID, 0x8900 + cmd)
+    }
+
+
+
+
+
     if (a.charAt(0) == 'K') {
       a = trim(a)
       let b = a.slice(1, a.length).split(' ')
       let cmd = parseInt(b[0])
-      if (cmd == 42) {
-        if (classifierEvt) {
-          classifierEvt(b[1])
-        }
-      } else if (cmd == 46) {
-        if (kmodelEvt) {
-          kmodelEvt(parseInt(b[1]))
-        }
-      } else if (cmd == 3) {
-        if (btnEvt) {
-          btnEvt(parseInt(b[1]), parseInt(b[2]), parseInt(b[3])) // btna btnb
-        }
-      } else if (cmd == 10) {
-        // circle position
-        if (circleEvt) {
-          circleEvt(parseInt(b[1]), parseInt(b[2]), parseInt(b[3])) // x y r
-        }
-      } else if (cmd == 11) {
-        // rect return
-        if (rectEvt) {
-          rectEvt(
-              parseInt(b[1]),
-              parseInt(b[2]),
-              parseInt(b[3]),
-              parseInt(b[4])
-          ) // x y w h
-        }
-      } else if (cmd == 12) {
-        // line track
-        if (lineEvt) {
-          lineEvt(
-              parseInt(b[1]),
-              parseInt(b[2]),
-              parseInt(b[3]),
-              parseInt(b[4])
-          )
-        }
-      } else if (cmd == 15) {
-        // color blob
-        if (colorblobEvt) {
-          colorblobEvt(
-              parseInt(b[1]),
-              parseInt(b[2]),
-              parseInt(b[3]),
-              parseInt(b[4])
-          )
-        }
-      } else if (cmd == 17) {
-        // image track return
-        if (imgtrackEvt) {
-          imgtrackEvt(
-              parseInt(b[1]),
-              parseInt(b[2]),
-              parseInt(b[3]),
-              parseInt(b[4])
-          )
-        }
-      } else if (cmd == 20) {
-        // qrcode return
-        if (qrcodeEvt) {
-          qrcodeEvt(b[1])
-        }
-      } else if (cmd == 22) {
-        // barcode return
-        if (barcodeEvt) {
-          barcodeEvt(b[1])
-        }
-      } else if (cmd == 23) {
-        // april tag return
-        if (apriltagEvt) {
-          apriltagEvt(
-              b[1],
-              parseInt(b[2]),
-              parseInt(b[3]),
-              parseInt(b[4]),
-              parseInt(b[5]),
-              Math.roundWithPrecision(parseFloat(b[6]), 2),
-              Math.roundWithPrecision(parseFloat(b[7]), 2),
-              Math.roundWithPrecision(parseFloat(b[8]), 2)
-          )
-        }
-      } else if (cmd == 31) {
-        // face position
-        if (facedetEvt && b[1]) {
-          facedetEvt(parseInt(b[1]), parseInt(b[2]))
-        }
-      } else if (cmd == 32) {
-        // face number
-        if (facenumEvt && b[1]) {
-          facenumEvt(parseInt(b[1]))
-        }
-        //  faceNum = parseInt(b[1])
-      } else if (cmd == 51) {
-        if (objectdetEvt && b[1]) {
-          objectdetEvt(b[1], parseInt(b[2]), parseInt(b[3]))
-        }
-      } else if (cmd == 54) {
-        // ip
-        if (ipEvt) {
-          ipEvt(b[1])
-        }
-      } else if (cmd == 55) {
-        if (mqttDataEvt) {
-          mqttDataEvt(b[1], b[2])
-        }
-      } else if (cmd == 61) {
-        if (carddetEvt && b[1]) {
-          carddetEvt(parseInt(b[1]))
-        }
-      } else if (cmd == 65) {
-        if (speechCmdEvt) {
-          speechCmdEvt(b[1])
-        }
-      } else if (cmd == 75) {
-        if (facetokenEvt) {
-          // K75 token age gender ismask expression
-          facetokenEvt(b[1], b[3], parseInt(b[2]), parseInt(b[4]), b[5])
-        }
-      } else if (cmd == 77) {
-        if (facefoundEvt) {
-          facefoundEvt(b[1], parseInt(b[2]))
-        }
-      } else {
-        lastCmd = b.slice(1); // deep copy?
-      }
-      control.raiseEvent(EventBusSource.MES_BROADCAST_GENERAL_ID, 0x8900 + cmd)
+
     }
   })
 
@@ -265,19 +157,6 @@ namespace ME66 {
     basic.pause(300)
   }
 
-  //% blockId=newland_init_pw block="Newland init powerbrick|Port %port"
-  //% group="Basic" weight=99
-  export function newland_init_pw(port: SerialPorts): void {
-    newland_init(PortSerial[port][0], PortSerial[port][1])
-  }
-
-  //% blockId=newland_lcd_direction block="Newland LCD Dir%dir"
-  //% group="Basic" weight=98
-  export function newland_lcd_direction(dir: LcdDirection): void {
-    let str = `K6 ${dir}`
-    serial.writeLine(str)
-    basic.pause(100)
-  }
 
 
   //% blockId=newland_volume_control block="Newland  Volume Dir%dir"
@@ -351,46 +230,10 @@ namespace ME66 {
   //% weight=96
   //% group="Basic" draggableParameters=reporter
   export function newland_onbtn(
-      handler: (btnA: number, btnB: number, btnEnter: number) => void
+      handler: (btnA: string, btnB: string, btnEnter: string) => void
   ): void {
     btnEvt = handler
   }
-
-  /**
-   * @param name savepath; eg: name.jpg
-   */
-  //% blockId=newland_screenshot block="Newland Screenshot %name"
-  //% group="Basic" weight=95
-  export function newland_screenshot(name: string): void {
-    let str = `K2 ${name}`
-    serial.writeLine(str)
-  }
-
-  /**
-   * @param name jpeg to display; eg: name.jpg
-   */
-  //% blockId=newland_display block="Newland Display %name"
-  //% group="Basic" weight=94 blockGap=40
-  export function newland_display(name: string): void {
-    let str = `K1 ${name}`
-    serial.writeLine(str)
-  }
-
-
-  //% blockId=newland_run block="Newland Run Classifer"
-  //% group="Classifier" weight=88
-  export function newland_run(): void {
-    let str = `K42`
-    serial.writeLine(str)
-    // asyncWrite(str, 42)
-  }
-
-  //% blockId=newland_classified block="on Identified"
-  //% group="Classifier" weight=87 draggableParameters=reporter
-  export function newland_classified(handler: (classId: string) => void) {
-    classifierEvt = handler
-  }
-
 
 
 }
