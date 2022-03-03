@@ -49,12 +49,7 @@ namespace ME66 {
     Back = 2,
   }
 
-  function trim(n: string): string {
-    while (n.charCodeAt(n.length - 1) < 0x1f) {
-      n = n.slice(0, n.length - 1)
-    }
-    return n
-  }
+
 
   serial.onDataReceived('\n', function () {
 
@@ -72,8 +67,6 @@ namespace ME66 {
       let cmd = 42;
       control.raiseEvent(EventBusSource.MES_BROADCAST_GENERAL_ID, 0x8900 + cmd)
     }
-
-
 
   })
 
@@ -143,7 +136,7 @@ namespace ME66 {
   //% weight=96
   //% group="Basic" draggableParameters=reporter
   export function newland_scan_items(
-      handler: (SKU: string, Name_PY: string, Price: string) => void
+      handler: (SKU: string, Name: string, Price: string) => void
   ): void {
     btnEvt = handler
   }
