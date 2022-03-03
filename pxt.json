@@ -1,6 +1,6 @@
 {
-    "name": "newland",
-    "version": "0.0.0",
+    "name": "newland ME66",
+    "version": "1.0.0",
     "description": "",
     "dependencies": {
         "core": "*",
@@ -22,5 +22,5 @@
         "microbit"
     ],
     "preferredEditor": "blocksprj",
-    "icon": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.91jm.com%2F2015%2F11%2F150D2BE826C.jpg&refer=http%3A%2F%2Fimg.91jm.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1631080775&t=6c96fde032c13432e31a9301df3ac779"
+    "icon": " https://makecode.trafficmanager.cn/blob/26055f70e6147a3e8a28f8d5baa40dcb4d7aed13/icon.png"
 }
