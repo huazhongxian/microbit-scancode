@@ -5,68 +5,13 @@ load dependency
 */
 
 //% color="#5c7cfa" weight=10 icon="\uf108"
-//% groups='["Basic", Classifier"]'
+//% groups='["Basic"]'
 namespace ME66 {
   //type起个新类型
-  type EvtAct = () => void
-  type EvtNum = (num: number) => void
-  type EvtCardNum = (num: number) => void
+
   type Evtxye = (x: string, y: string, e: string) => void
-  type Evtxy = (x: number, y: number) => void
-  type EvtFaceNum = (x: number) => void
-  type Evtxyobj = (txt: string, x: number, y: number) => void
-  type Evtxywh = (x: number, y: number, w: number, h: number) => void
-  type Evtxyr = (x: number, y: number, r: number) => void
-  type Evtpp = (x1: number, y1: number, x2: number, y2: number) => void
-  type Evttxt = (txt: string) => void
-  type Evtsxy = (
-      id: string,
-      x: number,
-      y: number,
-      w: number,
-      h: number,
-      rX: number,
-      rY: number,
-      rZ: number
-  ) => void
-  type Evtss = (t1: string, t2: string) => void
-  type Evtsn = (t1: string, n: number) => void
-  type Evtssnns = (t1: string, t2: string, n: number, n1: number, t3: string) => void
-
-  let classifierEvt: Evttxt = null
-  let kmodelEvt: EvtNum = null
-  let speechCmdEvt: Evttxt = null
-  let facetokenEvt: Evtssnns = null
-  let facefoundEvt: Evtsn = null
-
-
 
   let btnEvt: Evtxye = null
-  let circleEvt: Evtxyr = null
-  let rectEvt: Evtxywh = null
-  let colorblobEvt: Evtxywh = null
-  let lineEvt: Evtpp = null
-  let imgtrackEvt: Evtxywh = null
-  let qrcodeEvt: Evttxt = null
-  let barcodeEvt: Evttxt = null
-  let apriltagEvt: Evtsxy = null
-  let facedetEvt: Evtxy = null
-  let facenumEvt: EvtFaceNum = null
-  let objectdetEvt: Evtxyobj = null
-  let carddetEvt: EvtCardNum = null
-  let ipEvt: Evttxt = null
-  let mqttDataEvt: Evtss = null
-
-  let lastCmd: Array<string> = null
-  let faceNum = 0
-
-
-  const PortSerial = [
-    [SerialPin.P1, SerialPin.P2],
-    [SerialPin.P1, SerialPin.P12],
-    [SerialPin.P2, SerialPin.P13],
-    [SerialPin.P14, SerialPin.P15],
-  ]
 
   export enum SerialPorts {
     PORT1 = 0,
@@ -111,15 +56,23 @@ namespace ME66 {
     if (a.indexOf("<STX>") != -1) {
       basic.showNumber(7)
     } else {
-      basic.showString(a)
-      basic.showNumber(8)
-
-      let obj = JSON.parse(a);
-
+      //basic.showString(a)
+      //basic.showNumber(8)
+      let b = '{"SKU":1002,"Name_CN":"瓜子","Name_PY":"guazi","Price":10.00}';
+      let obj = JSON.parse(b);
+      //basic.showNumber(1)
+      basic.showString(obj.SKU)
+      basic.pause(1000)
+      basic.showNumber(2)
+      basic.showString(obj.Name_PY)
+      basic.pause(1000)
+      basic.showNumber(3)
+      basic.showString(obj.Price)
       if (btnEvt) {
+        //    btnEvt(obj.ABC, obj.ABC, obj.ABC) // btna btnb
         btnEvt(obj.SKU, obj.Name_PY, obj.Price) // btna btnb
       }
-      let cmd =42;
+      let cmd = 42;
       control.raiseEvent(EventBusSource.MES_BROADCAST_GENERAL_ID, 0x8900 + cmd)
     }
 
@@ -197,7 +150,7 @@ namespace ME66 {
   //% weight=96
   //% group="Basic" draggableParameters=reporter
   export function newland_onbtn(
-      handler: (SKU: string, name: string, Price: string) => void
+      handler: (SKU: string, Name_PY: string, Price: string) => void
   ): void {
     btnEvt = handler
   }
