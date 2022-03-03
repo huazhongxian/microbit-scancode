@@ -53,24 +53,25 @@ namespace ME66 {
   serial.onDataReceived('\n', function () {
 
     let a = serial.readUntil('\n')
+    basic.showString(a)
     if (a.indexOf("<STX>") != -1) {
-      basic.showNumber(7)
+      basic.showNumber(2)
     } else {
       //basic.showString(a)
-      //basic.showNumber(8)
-      let b = '{"SKU":1002,"Name_CN":"瓜子","Name_PY":"guazi","Price":10.00}';
-      let obj = JSON.parse(b);
+      basic.showNumber(8)
+      // let b = '{"SKU":1002,"Name_CN":"瓜子","Name_PY":"guazi","Price":10.00}';
+      let obj = JSON.parse(a);
       //basic.showNumber(1)
-      basic.showString(obj.SKU)
+      basic.showString(obj.ID)
       basic.pause(1000)
       basic.showNumber(2)
-      basic.showString(obj.Name_PY)
+      basic.showString(obj.user)
       basic.pause(1000)
       basic.showNumber(3)
-      basic.showString(obj.Price)
+      //   basic.showString(obj.Price)
       if (btnEvt) {
         //    btnEvt(obj.ABC, obj.ABC, obj.ABC) // btna btnb
-        btnEvt(obj.SKU, obj.Name_PY, obj.Price) // btna btnb
+        //     btnEvt(obj.SKU, obj.Name_PY, obj.Price) // btna btnb
       }
       let cmd = 42;
       control.raiseEvent(EventBusSource.MES_BROADCAST_GENERAL_ID, 0x8900 + cmd)
@@ -101,7 +102,8 @@ namespace ME66 {
   export function newland_init(tx: SerialPin, rx: SerialPin): void {
     serial.redirect(tx, rx, BaudRate.BaudRate115200)
     serial.readString()
-    //serial.writeString('\n\n')
+    serial.setRxBufferSize(128)
+    serial.writeString('\n\n')
     basic.pause(300)
   }
 
