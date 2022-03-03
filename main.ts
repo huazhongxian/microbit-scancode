@@ -107,9 +107,7 @@ namespace ME66 {
 
   serial.onDataReceived('\n', function () {
 
-
     let a = serial.readUntil('\n')
-
     if (a.indexOf("<STX>") != -1) {
       basic.showNumber(7)
     } else {
@@ -124,9 +122,6 @@ namespace ME66 {
       let cmd =42;
       control.raiseEvent(EventBusSource.MES_BROADCAST_GENERAL_ID, 0x8900 + cmd)
     }
-
-
-
 
 
     if (a.charAt(0) == 'K') {
@@ -157,8 +152,6 @@ namespace ME66 {
     basic.pause(300)
   }
 
-
-
   //% blockId=newland_volume_control block="Newland  Volume Dir%dir"
   //% group="Basic" weight=98
   export function newland_volume_control(dir: VolumeNum): void {
@@ -178,7 +171,6 @@ namespace ME66 {
     basic.pause(100)
   }
 
-
   //% blockId=newland_volume_onOff block="Newland Volume onOff%dir"
   //% group="Basic" weight=98
   export function newland_volume_onOff(dir: OnOffDirection): void {
@@ -190,7 +182,6 @@ namespace ME66 {
     basic.pause(100)
   }
 
-
   //% blockId=newland_volume_set block="Newland volume Set"
   //% group="Basic" weight=88
   export function newland_volume_set(): void {
@@ -201,9 +192,6 @@ namespace ME66 {
     serial.writeLine('<STX><0015><SET><01><00><RESET=ON><ETX><3A>')
     basic.pause(100)
   }
-
-
-
 
   //% blockId=newland_onbtn block="on Button"
   //% weight=96
