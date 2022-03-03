@@ -57,7 +57,7 @@
     "ME66.newland_mqtt_pub|block": "Mqtt 廣播 %topic %data",
     "ME66.newland_mqtt_read|block": "Mqtt 讀取 %topic",
     "ME66.newland_mqt|block": "當收到MQTT消息",
-    "ME66.newland_onbtn|block": "當按鍵按下",
+    "ME66.newland_onbtn|block": "扫描商品",
     "ME66.newland_audio_play|block": "播放wav音頻 %file",
     "ME66.newland_audio_rec|block": "錄制wav音頻 %file",
     "ME66.newland_apriltag|block": "AprilTag掃描",

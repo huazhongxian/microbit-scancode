@@ -203,40 +203,15 @@ namespace ME66 {
   }
 
 
-  //% blockId=newland_oncolorblob block="on Color blob"
-  //% group="Basic" weight=98 draggableParameters=reporter blockGap=40
-  export function newland_oncolorblob(
-      handler: (x: number, y: number, w: number, h: number) => void
-  ) {
-    colorblobEvt = handler
-  }
 
-
-  /**
-   * @param t string to display; eg: hello
-   * @param d delay; eg: 1000
-   */
-  //% blockId=newland_print block="Newland print %t X %x Y %y||delay %d ms"
-  //% x.min=0 x.max=320
-  //% y.min=0 y.max=240
-  //% group="Basic" weight=97
-  export function newland_print(t: string, x: number, y: number, d: number = 1000): void {
-
-    let str = `K4 ${x} ${y} ${d} ${t}\n`
-    serial.writeLine(str)
-  }
 
   //% blockId=newland_onbtn block="on Button"
   //% weight=96
   //% group="Basic" draggableParameters=reporter
   export function newland_onbtn(
-      handler: (btnA: string, btnB: string, btnEnter: string) => void
+      handler: (SKU: string, name: string, Price: string) => void
   ): void {
     btnEvt = handler
   }
 
-
 }
-
-
-
