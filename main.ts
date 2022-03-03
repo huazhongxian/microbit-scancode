@@ -59,37 +59,22 @@ namespace ME66 {
   serial.onDataReceived('\n', function () {
 
     let a = serial.readUntil('\n')
-    basic.showString(a)
     if (a.indexOf("<STX>") != -1) {
-      basic.showNumber(2)
+
     } else {
-      //basic.showString(a)
-      basic.showNumber(8)
       // let b = '{"SKU":1002,"Name_CN":"瓜子","Name_PY":"guazi","Price":10.00}';
       let obj = JSON.parse(a);
       //basic.showNumber(1)
-      basic.showString(obj.ID)
-      basic.pause(1000)
-      basic.showNumber(2)
-      basic.showString(obj.user)
-      basic.pause(1000)
-      basic.showNumber(3)
       //   basic.showString(obj.Price)
       if (btnEvt) {
-        //    btnEvt(obj.ABC, obj.ABC, obj.ABC) // btna btnb
-        //     btnEvt(obj.SKU, obj.Name_PY, obj.Price) // btna btnb
+             btnEvt(obj.SKU, obj.Name_PY, obj.Price) // btna btnb
       }
       let cmd = 42;
       control.raiseEvent(EventBusSource.MES_BROADCAST_GENERAL_ID, 0x8900 + cmd)
     }
 
 
-    if (a.charAt(0) == 'K') {
-      a = trim(a)
-      let b = a.slice(1, a.length).split(' ')
-      let cmd = parseInt(b[0])
 
-    }
   })
 
   function asyncWrite(msg: string, evt: number): void {
