@@ -21,11 +21,17 @@ namespace ME66 {
   }
 
   export enum VolumeNum {
+    //% block=Volume5
     Volume5 = 5,
+    //% block=Volume0
     Volume0 = 0,
+    //% block=Volume1
     Volume1 = 1,
+    //% block=Volume2
     Volume2 = 2,
+    //% block=Volume3
     Volume3 = 3,
+    //% block=Volume4
     Volume4 = 4,
   }
 
@@ -148,10 +154,10 @@ namespace ME66 {
     basic.pause(100)
   }
 
-  //% blockId=newland_onbtn block="on Button"
+  //% blockId=newland_scan_items block="on Button"
   //% weight=96
   //% group="Basic" draggableParameters=reporter
-  export function newland_onbtn(
+  export function newland_scan_items(
       handler: (SKU: string, Name_PY: string, Price: string) => void
   ): void {
     btnEvt = handler
