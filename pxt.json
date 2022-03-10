@@ -13,6 +13,7 @@
         "main.ts",
 	"_locales/zh-cn/newland-strings.json",
         "_locales/zh-tw/newland-strings.json",
+     "pxtparts.json",
         "parts/ME66.svg"
     ],
     "testFiles": [
