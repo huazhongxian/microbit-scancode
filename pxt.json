@@ -1,5 +1,5 @@
 {
-    "name": "newland",
+    "name": "ME66",
     "version": "0.0.0",
     "description": "",
     "dependencies": {
@@ -12,7 +12,8 @@
         "main.blocks",
         "main.ts",
 	"_locales/zh-cn/newland-strings.json",
-        "_locales/zh-tw/newland-strings.json"
+        "_locales/zh-tw/newland-strings.json",
+        "parts/ME66.svg"
     ],
     "testFiles": [
         "test.ts"
