@@ -1,5 +1,5 @@
 {
-    "name": "Newland",
+    "name": "newland",
     "version": "0.0.0",
     "description": "",
     "dependencies": {
@@ -11,10 +11,8 @@
         "README.md",
         "main.blocks",
         "main.ts",
-	"_locales/zh-cn/newland-strings.json",
-        "_locales/zh-tw/newland-strings.json",
-     "pxtparts.json",
-        "parts/ME66.svg"
+        "_locales/zh-cn/newland-strings.json",
+        "_locales/zh-tw/newland-strings.json"
     ],
     "testFiles": [
         "test.ts"
