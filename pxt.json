@@ -11,8 +11,8 @@
         "README.md",
         "main.blocks",
         "main.ts",
-        "_locales/zh-cn/newland-strings.json",
-        "_locales/zh-tw/newland-strings.json"
+	"_locales/zh-cn/ME66-strings.json",
+        "_locales/zh-tw/ME66-strings.json"
     ],
     "testFiles": [
         "test.ts"
